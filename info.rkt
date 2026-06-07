@@ -1,0 +1,11 @@
+#lang info
+(define collection "the-little-prover")
+(define deps '("base" "shrubbery-lib"))
+(define build-deps '("scribble-lib" "racket-doc" "rackunit-lib"))
+(define scribblings '(("scribblings/the-little-prover.scrbl" ())))
+(define pkg-desc "The Little Prover's J-Bob with a shrubbery surface syntax")
+(define version "0.1")
+(define pkg-authors '(dannypsnl))
+(define license "Apache-2.0 OR MIT")
+(define test-omit-paths '("vendor"))
+(define compile-omit-paths '("vendor"))
