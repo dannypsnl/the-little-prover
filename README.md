@@ -4,8 +4,10 @@
 
 ## Installation
 
-```
-raco pkg install --link .
+```sh
+git clone https://github.com/dannypsnl/the-little-prover.git
+cd the-little-prover
+raco pkg install --auto
 ```
 
 ## Usage
