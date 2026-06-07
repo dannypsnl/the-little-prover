@@ -1,0 +1,45 @@
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+name: Docs
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  build:
+    name: Build scribblings
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: Bogdanp/setup-racket@v1.15
+        with:
+          architecture: x64
+          distribution: full
+          variant: CS
+          version: stable
+      - name: Installing the-little-prover and its dependencies
+        run: raco pkg install --no-docs --auto --name the-little-prover
+      - name: Rendering scribblings to HTML
+        run: >-
+          raco scribble --htmls +m
+          --redirect-main https://docs.racket-lang.org/
+          --dest dist --dest-name site
+          scribblings/the-little-prover.scrbl
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/site
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
