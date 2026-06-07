@@ -152,8 +152,7 @@ above, one run at a time. When the claim reaches @c{'t'}, the
 @c{proof induction(@racketvarfont{seed}):} and the totality proofs of
 recursive @c{defun}s start from a claim the checker generates (see
 @secref["proofs"]) — put a @c{sorry} in and the checker shows it to
-you. The VSCode extension under @c{vscode-extension/} shows the claim
-at the cursor in a panel (@c{ctrl+alt+p}), saving the run loop.
+you.
 
 @section{The language}
 
